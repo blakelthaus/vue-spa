@@ -1,17 +1,14 @@
 <template>
     <div class="users">
-        <div class="loading" v-if="loading">
-            Loading...
-        </div>
-
         <div v-if="error" class="error">
-            {{ error }}
+            <p>{{ error }}</p>
         </div>
 
         <ul v-if="users">
-            <li v-for="{ name, email } in users">
+            <li v-for="{ id, name, email } in users">
                 <strong>Name:</strong> {{ name }},
-                <strong>Email:</strong> {{ email }}
+                <strong>Email:</strong> {{ email }},
+                <router-link :to="{ name: 'users.edit', params: { id } }">Edit</router-link>
             </li>
         </ul>
 
@@ -22,7 +19,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import axios from 'axios';
 
